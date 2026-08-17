@@ -1,0 +1,217 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-brand-accent: var(--brand-accent);
+    --color-brand-muted: var(--brand-muted);
+    --color-sidebar-active: var(--sidebar-active);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+    --brand-accent: oklch(0.55 0.25 290);
+    --brand-muted: oklch(0.96 0.03 290);
+    --sidebar-active: oklch(0.55 0.25 290 / 8%);
+}
+
+/* ─── DARK MODE ─────────────────────────────────────────────────────────────
+   Paleta neutra escura sem nenhum cast de cor (sem vinho, sem vermelho).
+   Todos os fundos são cinza-zinc puro para máximo contraste.
+   ────────────────────────────────────────────────────────────────────────── */
+.dark {
+    /* Fundos — zinc neutro, sem tons de cor */
+    --background:  oklch(0.13 0 0);   /* zinc-950 equivalente — quase preto neutro */
+    --foreground:  oklch(0.96 0 0);   /* zinc-50  — texto principal bem claro */
+
+    /* Cards e popovers ligeiramente mais claros que o fundo */
+    --card:            oklch(0.19 0 0);   /* zinc-900 */
+    --card-foreground: oklch(0.96 0 0);
+    --popover:         oklch(0.19 0 0);
+    --popover-foreground: oklch(0.96 0 0);
+
+    /* Primário: texto claro para usar sobre fundos escuros */
+    --primary:            oklch(0.94 0 0);  /* zinc-100 */
+    --primary-foreground: oklch(0.19 0 0);  /* zinc-900 */
+
+    /* Secundário / Muted — superfícies um pouco mais claras */
+    --secondary:            oklch(0.27 0 0);  /* zinc-800 */
+    --secondary-foreground: oklch(0.94 0 0);
+    --muted:                oklch(0.27 0 0);
+    --muted-foreground:     oklch(0.65 0 0);  /* zinc-400 — boa legibilidade */
+    --accent:               oklch(0.27 0 0);
+    --accent-foreground:    oklch(0.94 0 0);
+
+    /* Destrutivo: vermelho vibrante mas não poluindo o fundo */
+    --destructive: oklch(0.65 0.22 22);
+
+    /* Bordas e inputs — semitransparentes sobre fundo escuro */
+    --border: oklch(1 0 0 / 12%);
+    --input:  oklch(1 0 0 / 16%);
+    --ring:   oklch(0.55 0.25 290 / 60%);  /* ring na cor brand para foco nítido */
+
+    /* Gráficos */
+    --chart-1: oklch(0.75 0.18 290);
+    --chart-2: oklch(0.65 0.15 200);
+    --chart-3: oklch(0.60 0.20 150);
+    --chart-4: oklch(0.70 0.20 50);
+    --chart-5: oklch(0.65 0.22 22);
+
+    /* Sidebar — um toque mais claro que o background */
+    --sidebar:                   oklch(0.17 0 0);
+    --sidebar-foreground:        oklch(0.96 0 0);
+    --sidebar-primary:           oklch(0.55 0.25 290);
+    --sidebar-primary-foreground: oklch(0.98 0 0);
+    --sidebar-accent:            oklch(0.25 0 0);
+    --sidebar-accent-foreground: oklch(0.96 0 0);
+    --sidebar-border:            oklch(1 0 0 / 10%);
+    --sidebar-ring:              oklch(0.55 0.25 290 / 60%);
+
+    /* Brand — mantém a cor roxa/violeta da identidade visual */
+    --brand-accent: oklch(0.62 0.22 290);  /* um pouco mais brilhante no escuro */
+    --brand-muted:  oklch(0.25 0.06 290);
+    --sidebar-active: oklch(0.62 0.22 290 / 14%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+
+/* ─── DARK MODE — Badge/Tag overrides globais ─────────────────────────────
+   Corrige badges que só têm estilos light e ficam ilegíveis no dark.
+   ────────────────────────────────────────────────────────────────────────── */
+.dark .badge-lote-pronto {
+    background-color: oklch(0.92 0 0) !important;
+    color: oklch(0.13 0 0) !important;
+    border: none !important;
+}
+
+.dark .badge-sky {
+    background-color: oklch(0.30 0.06 220) !important;
+    color: oklch(0.82 0.12 220) !important;
+    border-color: oklch(0.40 0.09 220) !important;
+}
+
+.dark .badge-amber {
+    background-color: oklch(0.30 0.07 70) !important;
+    color: oklch(0.85 0.15 70) !important;
+    border-color: oklch(0.42 0.10 70) !important;
+}
+
+.dark .badge-blue {
+    background-color: oklch(0.28 0.07 250) !important;
+    color: oklch(0.80 0.14 250) !important;
+    border-color: oklch(0.38 0.10 250) !important;
+}
+
+.dark .badge-purple {
+    background-color: oklch(0.28 0.07 300) !important;
+    color: oklch(0.80 0.14 300) !important;
+    border-color: oklch(0.40 0.10 300) !important;
+}
+
+.dark .badge-emerald {
+    background-color: oklch(0.28 0.08 160) !important;
+    color: oklch(0.80 0.16 160) !important;
+    border-color: oklch(0.40 0.11 160) !important;
+}
+
+@keyframes nexus-logo-reveal {
+  0% { opacity: 0; filter: blur(10px) brightness(2); transform: scale(0.9); }
+  60% { opacity: 0; filter: blur(5px) brightness(2); transform: scale(0.95); }
+  100% { opacity: 1; filter: blur(0px) brightness(1); transform: scale(1); }
+}
+
+@keyframes laser-shoot {
+  0% { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(200px) scaleY(3); opacity: 0; }
+  20% { opacity: 1; }
+  80% { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(10px) scaleY(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scaleY(0); opacity: 0; }
+}
+
+@keyframes laser-fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
