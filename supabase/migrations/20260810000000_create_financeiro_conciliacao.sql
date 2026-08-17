@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS public.financeiro_documentos (
     tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('ATESTO', 'NF')),
     numero VARCHAR(100) NOT NULL,
     data DATE NOT NULL,
-    empresa VARCHAR(100) NOT NULL CHECK (empresa IN ('APROMEDICA', 'ROSAFARM')),
+    empresa VARCHAR(100) NOT NULL CHECK (empresa IN ('NEXUS', 'ROSAFARM')),
     entidade_id UUID REFERENCES public.entidades(id) ON DELETE SET NULL,
     valor NUMERIC(15, 2) NOT NULL,
     observacao TEXT,

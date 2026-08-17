@@ -157,7 +157,7 @@ Os principais pontos que impactam o fornecimento são:
   // --- Estado: Termo de Doação ---
   const [doacaoTitulo, setDoacaoTitulo] = useState('TERMO DE DOAÇÃO DE AGULHAS')
   const [doacaoDonataria, setDoacaoDonataria] = useState('UNIVERSIDADE ESTADUAL DE CIÊNCIAS DA SAÚDE DE ALAGOAS – UNCISAL')
-  const [doacaoDonatariaCnpj, setDoacaoDonatariaCnpj] = useState('17.683.906/0001-50')
+  const [doacaoDonatariaCnpj, setDoacaoDonatariaCnpj] = useState('00.000.000/0001-95')
   const [doacaoEndereco, setDoacaoEndereco] = useState('Rua Doutor Jorge Lima, nº 113, Bairro Trapiche da Barra, Maceió – AL, CEP: 57010-382')
   const [doacaoForo, setDoacaoForo] = useState('Maceió – AL')
   const [doacaoLocalData, setDoacaoLocalData] = useState(`PALMAS – TO, ${getDataExtenso()}.`)
@@ -253,7 +253,7 @@ Os principais pontos que impactam o fornecimento são:
       ])
       setDoacaoTitulo('TERMO DE DOAÇÃO DE AGULHAS')
       setDoacaoDonataria('UNIVERSIDADE ESTADUAL DE CIÊNCIAS DA SAÚDE DE ALAGOAS – UNCISAL')
-      setDoacaoDonatariaCnpj('17.683.906/0001-50')
+      setDoacaoDonatariaCnpj('00.000.000/0001-95')
       setDoacaoEndereco('Rua Doutor Jorge Lima, nº 113, Bairro Trapiche da Barra, Maceió – AL, CEP: 57010-382')
       setDoacaoForo('Maceió – AL')
       setDoacaoLocalData(`PALMAS – TO, ${getDataExtenso()}.`)
@@ -444,7 +444,7 @@ Os principais pontos que impactam o fornecimento são:
 
     htmlContent.push('<div style="font-family: Arial, sans-serif; font-size: 10pt; display: flex; justify-content: space-between; margin-top: 0px; border-bottom: 1px solid #999; padding-bottom: 4px; margin-bottom: 20px;">')
     htmlContent.push('<span style="color: #555;">empenhos@rosafarm.com.br</span>')
-    htmlContent.push('<span style="font-weight: bold; color: #555;">CNPJ: 37.676.047/0001-80</span>')
+    htmlContent.push('<span style="font-weight: bold; color: #555;">CNPJ: 00.000.000/0001-99</span>')
     htmlContent.push("</div>")
 
     if (tipoDoc === "validade") {
@@ -475,7 +475,7 @@ Os principais pontos que impactam o fornecimento são:
 
       htmlContent.push(`<p style="font-family: Arial, sans-serif; font-size: 11pt; font-weight: bold; line-height: 1.2; margin-bottom: 25px;">${idLines.join('<br>')}</p>`)
 
-      htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa <b>ROSAFARM DISTRIBUIDORA</b>, inscrita no CNPJ nº <b>37.676.047/0001-80</b>, com sede à <b>QD ASR NE 55 Alameda 8 (412 Norte), SN – Plano Diretor Norte, CEP 77.006-534, Palmas/TO</b>, vem, por meio desta, apresentar sua CARTA DE <b>COMPROMETIMENTO DE TROCA</b>, referente ao fornecimento realizado para <b>${cli}</b>, conforme <b>Nota Fiscal</b> acima identificada.</p>`)
+      htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa <b>ROSAFARM DISTRIBUIDORA</b>, inscrita no CNPJ nº <b>00.000.000/0001-99</b>, com sede à <b>QD ASR NE 55 Alameda 8 (412 Norte), SN – Plano Diretor Norte, CEP 77.006-534, Palmas/TO</b>, vem, por meio desta, apresentar sua CARTA DE <b>COMPROMETIMENTO DE TROCA</b>, referente ao fornecimento realizado para <b>${cli}</b>, conforme <b>Nota Fiscal</b> acima identificada.</p>`)
       htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt; margin-bottom: 20px;">Declaramos nosso compromisso quanto ao(s) item(ns) abaixo descrito(s):</p>')
 
       ordensValidade.forEach((ordem) => {
@@ -512,7 +512,7 @@ Os principais pontos que impactam o fornecimento são:
       htmlContent.push('<p style="text-align: center; font-family: Arial, sans-serif; font-size: 12pt; font-weight: bold;">SOLICITAÇÃO DE TROCA DE MARCA</p>')
       htmlContent.push(`<p style="font-family: Arial, sans-serif; font-size: 11pt; font-weight: bold; line-height: 1.2; margin-bottom: 25px;">À<br>${cli}</p>`)
       htmlContent.push(`<p style="font-family: Arial, sans-serif; font-size: 12pt;">PALMAS - TO, ${dataExtensa}.</p>`)
-      htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA, inscrita no CNPJ nº: 37.676.047/0001-80, com sede na ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO.</p>')
+      htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA, inscrita no CNPJ nº: 00.000.000/0001-99, com sede na ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO.</p>')
       htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">Em atenção ${prepAoV1} ${formatarNomeVinculo(tipoVinculo1)} nº <b>${valV1}</b>${strEmpenhos}${strProcesso}, vimos, por meio deste, solicitar a autorização para <b>troca da marca</b> dos produtos especificados abaixo:</p>`)
 
       itensTroca.forEach((item, index) => {
@@ -626,7 +626,7 @@ Os principais pontos que impactam o fornecimento são:
       if (numContrato) htmlContent.push(`•	Contrato: nº ${fmt(numContrato)}<br>`)
       if (numAta) htmlContent.push(`•	Ata de Registro de Preços: nº ${fmt(numAta)}</p>`)
 
-      htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 20px;"><b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ sob o nº <b>37.676.047/0001-80</b>, com sede na <b>ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO</b>, vem, por intermédio deste, solicitar formalmente a dilação do prazo de entrega por <b>${fmt(prazoSolicitado)} dias</b>, referente aos itens constantes na Ordem de Fornecimento supracitada, com base nos fatos e justificativas a seguir expostos:</p>`)
+      htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; margin-bottom: 20px;"><b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ sob o nº <b>00.000.000/0001-99</b>, com sede na <b>ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO</b>, vem, por intermédio deste, solicitar formalmente a dilação do prazo de entrega por <b>${fmt(prazoSolicitado)} dias</b>, referente aos itens constantes na Ordem de Fornecimento supracitada, com base nos fatos e justificativas a seguir expostos:</p>`)
       
       htmlContent.push('<p style="font-family: Arial, sans-serif; font-size: 11pt; font-weight: bold; margin-bottom: 10px;">1. Dos Itens Objeto da Solicitação</p>')
       htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 11pt; margin-bottom: 10px;">O pedido de prorrogação refere-se ao fornecimento de Equipamentos de Proteção Individual (EPI), especificamente:</p>')
@@ -654,7 +654,7 @@ Os principais pontos que impactam o fornecimento são:
       htmlContent.push(`<p style="text-align: center; font-family: Arial, sans-serif; font-size: 13pt; font-weight: bold; letter-spacing: 1px; margin: 25px 0;">TERMO DE DOAÇÃO</p>`)
 
       htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.6; margin-bottom: 15px;">
-        Pelo presente instrumento particular, de um lado, a empresa <b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ nº <b>37.676.047/0001-80</b>, com Inscrição Estadual nº <b>29.505.442-5</b>, sediada na Rua Q ASR NE 55, Alameda 8, Lote 07, QI 09, CEP: <b>77.006-534</b>, na cidade de Palmas – TO, telefone nº <b>(63) 9292-7667</b> e e-mail <b>licitacoes@rosafarm.com.br</b>, neste ato representada por seu representante legal, doravante denominada <b>DOADORA</b>;
+        Pelo presente instrumento particular, de um lado, a empresa <b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ nº <b>00.000.000/0001-99</b>, com Inscrição Estadual nº <b>29.505.442-5</b>, sediada na Rua Q ASR NE 55, Alameda 8, Lote 07, QI 09, CEP: <b>77.006-534</b>, na cidade de Palmas – TO, telefone nº <b>(63) 9292-7667</b> e e-mail <b>licitacoes@rosafarm.com.br</b>, neste ato representada por seu representante legal, doravante denominada <b>DOADORA</b>;
       </p>`)
 
       htmlContent.push(`<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.6; margin-bottom: 20px;">
@@ -734,7 +734,7 @@ Os principais pontos que impactam o fornecimento são:
       // Cabeçalho Estático
       htmlContent.push(`<div style="text-align: center; font-family: Arial, sans-serif; font-size: 10pt; border-bottom: 1.5px solid #333; padding-bottom: 10px; margin-bottom: 18px;">`)
       htmlContent.push(`<p style="font-size: 13pt; font-weight: bold; margin: 0;">ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</p>`)
-      htmlContent.push(`<p style="margin: 2px 0;">CNPJ: 37.676.047/0001-80</p>`)
+      htmlContent.push(`<p style="margin: 2px 0;">CNPJ: 00.000.000/0001-99</p>`)
       htmlContent.push(`<p style="margin: 2px 0;">QUADRA ASR NE 55 ALAMEDA 8, 07, LOTE 07, PLANO DIRETOR NORTE</p>`)
       htmlContent.push(`<p style="margin: 2px 0;">CEP: 77.006-534, PALMAS - TO | Contato: (63) 99292-7667</p>`)
       htmlContent.push(`</div>`)
@@ -794,7 +794,7 @@ Os principais pontos que impactam o fornecimento são:
       htmlContent.push('<p style="text-align: center; font-family: Arial, sans-serif; font-size: 12pt; font-weight: bold; text-decoration: underline; margin-bottom: 25px;">JUSTIFICATIVA DE ALTERAÇÃO DE DESCRITIVO</p>')
       htmlContent.push(`<p style="font-family: Arial, sans-serif; font-size: 11pt; font-weight: bold; line-height: 1.2; margin-bottom: 25px;">À<br>${cli}</p>`)
       htmlContent.push(`<p style="font-family: Arial, sans-serif; font-size: 12pt;">PALMAS - TO, ${dataExtensa}.</p>`)
-      htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa <b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ nº <b>37.676.047/0001-80</b>, com sede na <b>ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO</b>.</p>')
+      htmlContent.push('<p style="text-align: justify; font-family: Arial, sans-serif; font-size: 12pt;">A empresa <b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA</b>, inscrita no CNPJ nº <b>00.000.000/0001-99</b>, com sede na <b>ALAMEDA 08, QUADRA 412 NORTE, CEP: 77.006-534, Palmas/TO</b>.</p>')
       
       let refTexto = ""
       if (valV1) {
@@ -843,7 +843,7 @@ Os principais pontos que impactam o fornecimento são:
         <p style="text-align: center; font-family: Arial, sans-serif; font-size: 12pt;">
           ______________________________________________________________<br>
           <b>ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS</b><br>
-          CNPJ 37.676.047/0001-80
+          CNPJ 00.000.000/0001-99
         </p>
       </div>
     </div>`)

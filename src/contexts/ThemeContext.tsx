@@ -12,14 +12,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem('apromedica-theme');
+    const saved = localStorage.getItem('NEXUS-theme');
     if (saved === 'dark' || saved === 'light') return saved;
     return 'light'; // Default
   });
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem('apromedica-theme', newTheme);
+    localStorage.setItem('NEXUS-theme', newTheme);
   };
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');

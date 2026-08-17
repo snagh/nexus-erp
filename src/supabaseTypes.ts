@@ -15,7 +15,7 @@ export interface Database {
           tipo: 'ATESTO' | 'NF'
           numero: string
           data: string
-          empresa: 'APROMEDICA' | 'ROSAFARM'
+          empresa: 'NEXUS' | 'ROSAFARM'
           entidade_id: string | null
           valor: number
           observacao: string | null
@@ -29,7 +29,7 @@ export interface Database {
           tipo: 'ATESTO' | 'NF'
           numero: string
           data: string
-          empresa: 'APROMEDICA' | 'ROSAFARM'
+          empresa: 'NEXUS' | 'ROSAFARM'
           entidade_id?: string | null
           valor: number
           observacao?: string | null
@@ -43,7 +43,7 @@ export interface Database {
           tipo?: 'ATESTO' | 'NF'
           numero?: string
           data?: string
-          empresa?: 'APROMEDICA' | 'ROSAFARM'
+          empresa?: 'NEXUS' | 'ROSAFARM'
           entidade_id?: string | null
           valor?: number
           observacao?: string | null

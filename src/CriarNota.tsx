@@ -316,7 +316,7 @@ export function CriarNota({ aoSalvar }: CriarNotaProps) {
             if (dados.fornecedor_valido === false) {
                 const fornNome = dados.fornecedor_nome_detectado || 'Empresa terceira'
                 toast.error(
-                    `Importação bloqueada! O fornecedor deste documento é "${fornNome}". O sistema permite importações apenas da ROSAFARM ou APROMEDICA.`,
+                    `Importação bloqueada! O fornecedor deste documento é "${fornNome}". O sistema permite importações apenas da ROSAFARM ou NEXUS.`,
                     { duration: 10000 }
                 )
                 setProgress(0)

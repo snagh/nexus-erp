@@ -37,7 +37,7 @@ interface FinanceiroDocumento {
   tipo: 'ATESTO' | 'NF'
   numero: string
   data: string
-  empresa: 'APROMEDICA' | 'ROSAFARM'
+  empresa: 'NEXUS' | 'ROSAFARM'
   entidade_id: any
   valor: number
   observacao: string | null
@@ -57,7 +57,7 @@ interface VendorDeliveryGroup {
   entidade_nome: string
   entidade_municipio: string | null
   entidade_estado: string | null
-  empresa: 'APROMEDICA' | 'ROSAFARM'
+  empresa: 'NEXUS' | 'ROSAFARM'
   valor_total: number
   jaImportado: boolean
 }
@@ -81,7 +81,7 @@ export function Financeiro() {
     tipo: 'ATESTO' | 'NF'
     numero: string
     data: string
-    empresa: 'APROMEDICA' | 'ROSAFARM'
+    empresa: 'NEXUS' | 'ROSAFARM'
     entidade_id: string
     valor: string
     observacao: string
@@ -89,7 +89,7 @@ export function Financeiro() {
     tipo: 'ATESTO',
     numero: '',
     data: new Date().toISOString().split('T')[0],
-    empresa: 'APROMEDICA',
+    empresa: 'NEXUS',
     entidade_id: '',
     valor: '',
     observacao: ''
@@ -167,7 +167,7 @@ export function Financeiro() {
             const matchedAta = (atas || []).find(a => a.id === matchedItemAta.ata_id)
             if (matchedAta) {
               entidadeId = matchedAta.entidade_id
-              emissor = 'APROMEDICA' // Default corporativo para ATA
+              emissor = 'NEXUS' // Default corporativo para ATA
             }
           }
         }
@@ -213,7 +213,7 @@ export function Financeiro() {
           entidade_nome: item.entidade_nome,
           entidade_municipio: item.entidade_municipio,
           entidade_estado: item.entidade_estado,
-          empresa: String(item.emissor || '').toUpperCase().includes('ROSAFARM') ? 'ROSAFARM' : 'APROMEDICA',
+          empresa: String(item.emissor || '').toUpperCase().includes('ROSAFARM') ? 'ROSAFARM' : 'NEXUS',
           valor_total: 0
         }
       }
@@ -384,7 +384,7 @@ export function Financeiro() {
         tipo: 'ATESTO',
         numero: '',
         data: new Date().toISOString().split('T')[0],
-        empresa: 'APROMEDICA',
+        empresa: 'NEXUS',
         entidade_id: '',
         valor: '',
         observacao: ''
@@ -530,7 +530,7 @@ export function Financeiro() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all" className="font-semibold">Todas as Empresas</SelectItem>
-                <SelectItem value="APROMEDICA">APROMEDICA</SelectItem>
+                <SelectItem value="NEXUS">NEXUS</SelectItem>
                 <SelectItem value="ROSAFARM">ROSAFARM</SelectItem>
               </SelectContent>
             </Select>
@@ -1110,13 +1110,13 @@ export function Financeiro() {
                   <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Empresa Faturadora *</label>
                   <Select 
                     value={novoDoc.empresa} 
-                    onValueChange={(val: 'APROMEDICA' | 'ROSAFARM') => setNovoDoc(prev => ({ ...prev, empresa: val }))}
+                    onValueChange={(val: 'NEXUS' | 'ROSAFARM') => setNovoDoc(prev => ({ ...prev, empresa: val }))}
                   >
                     <SelectTrigger className="h-9 text-xs rounded-lg border-zinc-200 dark:border-zinc-700">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="APROMEDICA">APROMEDICA</SelectItem>
+                      <SelectItem value="NEXUS">NEXUS</SelectItem>
                       <SelectItem value="ROSAFARM">ROSAFARM</SelectItem>
                     </SelectContent>
                   </Select>

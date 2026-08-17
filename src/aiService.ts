@@ -474,7 +474,7 @@ export async function extrairDadosAta(file: File) {
 
       const promptAtaScanned = `
       Você é um especialista em Atas de Registro de Preços (ARP) brasileiras de altíssima precisão.
-      Sua tarefa é extrair os dados do cabeçalho E todos os itens da tabela de produtos registrados para a empresa ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA (CNPJ: 37.676.047/0001-80) ou APROMEDICA.
+      Sua tarefa é extrair os dados do cabeçalho E todos os itens da tabela de produtos registrados para a empresa ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA (CNPJ: 00.000.000/0001-99) ou NEXUS.
 
       REGRA GEOGRÁFICA CRÍTICA:
       - 'orgao_gerenciador.municipio' e 'orgao_gerenciador.estado' devem ser do órgão COMPRADOR (prefeitura, hospital, consórcio), NUNCA do fornecedor (ex: ROSAFARM está em Palmas/TO — ignore esse endereço).
@@ -818,7 +818,7 @@ REGRAS FINAIS:
         const fornUpper = fornOriginal.toUpperCase();
         if (fornUpper.includes("ROSAFARM")) {
           cnpjOriginal = "37676047";
-        } else if (fornUpper.includes("APROMEDICA")) {
+        } else if (fornUpper.includes("NEXUS")) {
           cnpjOriginal = "13973552";
         } else {
           cnpjOriginal = fornUpper.replace(/[^A-Z0-9]/g, "").substring(0, 8);
@@ -845,7 +845,7 @@ REGRAS FINAIS:
       const clean = fornStr.toUpperCase().replace(/[^A-Z0-9]/g, "");
       return (
         clean.includes("ROSAFARM") ||
-        clean.includes("APROMEDICA") ||
+        clean.includes("NEXUS") ||
         clean.includes("37676047") ||
         clean.includes("13973552")
       );
@@ -858,7 +858,7 @@ REGRAS FINAIS:
         clean.includes("37676047") ||
         clean.includes("13973552") ||
         clean.includes("ROSAFARM") ||
-        clean.includes("APROMEDICA");
+        clean.includes("NEXUS");
       if (temNossoCNPJ) return false;
 
       const termosGenericos = [
@@ -909,8 +909,8 @@ REGRAS FINAIS:
       // Se a chave estiver ativa, normalizamos o nome e incluímos o item
       if (isNossaEmpresa) {
         const upper = fornOriginal.toUpperCase();
-        if (upper.includes("APROMEDICA") || upper.includes("13973552")) {
-          item.fornecedor = "APROMEDICA (Consolidado)";
+        if (upper.includes("NEXUS") || upper.includes("13973552")) {
+          item.fornecedor = "NEXUS (Consolidado)";
         } else {
           item.fornecedor = "ROSAFARM (Consolidado)";
         }
@@ -1637,7 +1637,7 @@ export async function extrairDadosPedido(file: File) {
     REGRAS:
     - numero_pedido: Capture o número do pedido ou ordem. Em documentos "RESERVA DE PEDIDO" (como modelos ROSAFARM/WSGE), busque por "Pedido Nº: XXXX" (ex: "4797" ou "4563"). Em "ORDEM DE FORNECIMENTO", busque por "ORDEM DE FORNECIMENTO 4265/2026". Em DAVs, busque após "DAVN.:" ou "DAV:".
     - cliente: Capture o nome do cliente / prefeitura / órgão (ex: "FUNDO MUNICIPAL DE SAUDE DE MONTE DO CARMO - TO - 180", "Prefeitura Municipal de Marcelândia - MT" ou "MUNICIPIO DE COLIDER - MT").
-    - cnpj_cliente: Capture o CNPJ do cliente se houver (ex: "11.425.245/0001-87" ou "03.238.987/0001-75").
+    - cnpj_cliente: Capture o CNPJ do cliente se houver (ex: "00.000.000/0001-98" ou "00.000.000/0001-97").
     - numero_empenho_referencia: Procure em "Obs. do Pedido", "Informações Orçamentárias", "Número ARP", "ATA DE REGISTRO DE PREÇOS" por referências de ATA ou Empenho (ex: "ATA DE REGISTRO DE PREÇOS Nº: 002/2026", "PREGÃO ELETRÔNICO Nº: 001/2026", "ORDEM DE FORNECIMENTO: 4265/2026", "EMPENHO: 12174/2026"). Capture a referência limpa.
     - data_emissao: Capture a data do documento (ex: "23/07/2026", "21/07/2026", "16/04/2026" ou "Palmas, 23 de julho de 2026") e converta para YYYY-MM-DD.
     - valor_total_pedido: Valor total global do pedido / reserva de pedido (ex: "Valor Total do Pedido: R$ 23.293,70" -> "23293.70", "30269.78" ou "419.50") como STRING.
@@ -1869,7 +1869,7 @@ Sua missão é ler o texto extraído do PDF e retornar um objeto JSON perfeitame
 - valor_total_documento: O valor global financeiro do documento.
 
 === 2. DADOS DOS ITENS (TABELA DE PRODUTOS) ===
-- EXTRAÇÃO COMPLETA DE ITENS: Extraia TODOS os itens de produtos e medicamentos listados na especificação do documento (Ordem de Fornecimento, Nota de Empenho ou Ordem de Compra), independente de qual seja a razão social do fornecedor (ex: ALTO URUGUAI, ROSAFARM, APROMEDICA, etc.). NUNCA retorne a lista de itens vazia se houver produtos na tabela.
+- EXTRAÇÃO COMPLETA DE ITENS: Extraia TODOS os itens de produtos e medicamentos listados na especificação do documento (Ordem de Fornecimento, Nota de Empenho ou Ordem de Compra), independente de qual seja a razão social do fornecedor (ex: ALTO URUGUAI, ROSAFARM, NEXUS, etc.). NUNCA retorne a lista de itens vazia se houver produtos na tabela.
 
 === 3. REGRAS ANTI-ALUCINAÇÃO E FORMATAÇÃO DE TABELAS (MUITO IMPORTANTE) ===
 - EVITAR DADOS DO FORNECEDOR E ALUCINAÇÕES GEOGRÁFICAS NO ÓRGÃO EMISSOR: O documento contém dados do fornecedor/vencedor (ex: ALTO URUGUAI, ROSAFARM, etc.). JAMAIS use a cidade ou CNPJ do fornecedor como sendo do órgão emissor. O município e UF do orgao_emissor devem refletir única e exclusivamente a localização do órgão público comprador (ex: "Prefeitura Municipal de Marcelândia - MT" -> Município: "Marcelândia", UF: "MT").
@@ -1888,7 +1888,7 @@ Sua missão é ler o texto extraído do PDF e retornar um objeto JSON perfeitame
 - VALOR UNITÁRIO SOBERANO E CONSISTÊNCIA MATEMÁTICA: O valor unitário impresso na tabela de produtos é individual e soberano. NUNCA confunda 'Preço Unitario' com 'Valor Total'. Valide sempre que quantidade × valor_unitario = valor_total da linha!
 
 === 4. DADOS DO FORNECEDOR CONTRATADO ===
-- fornecedor.nome: Identifique a Razão Social ou Nome Fantasia da empresa fornecedora/vencedora citada no documento (ex: "ALTO URUGUAI COMÉRCIO DE PRODUTOS HOSPITALARES LTDA", "ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA", "APROMEDICA", etc.).
+- fornecedor.nome: Identifique a Razão Social ou Nome Fantasia da empresa fornecedora/vencedora citada no documento (ex: "ALTO URUGUAI COMÉRCIO DE PRODUTOS HOSPITALARES LTDA", "ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA", "NEXUS", etc.).
 - fornecedor.cnpj: CNPJ do fornecedor se houver.
 
 === 5. SAÍDA DE DADOS ===
@@ -1972,7 +1972,7 @@ Retorne APENAS um JSON válido e minificado que cumpra o schema exigido. NÃO in
         const normCnpj = cnpj.replace(/\D/g, '');
         
         if (normNome.includes('ROSAFARM') || normNome.includes('ROSAFARMA')) return true;
-        if (normNome.includes('APROMEDICA') || normNome.includes('APROMED')) return true;
+        if (normNome.includes('NEXUS') || normNome.includes('APROMED')) return true;
         if (normCnpj.includes('37676047') || normCnpj.includes('54582493')) return true;
         return false;
       };

@@ -772,17 +772,17 @@ async function renderPdfPagesToJpegs(pdf: any, startPage: number, endPage: numbe
         const promptHeader = `Analise o texto desta Ata de Registro de Preços (ou Contrato/Adesão) e extraia os dados solicitados.
 
 DADOS DA EMPRESA ALVO (FORNECEDOR):
-- Razão Social: ROSAFARM ou APROMEDICA
-- CNPJ: 37.676.047/0001-80 (Rosafarm) ou 13.973.552/0001-28 (Apromedica)
+- Razão Social: ROSAFARM ou NEXUS
+- CNPJ: 00.000.000/0001-99 (Rosafarm) ou 00.000.000/0001-96 (NEXUS)
 
 REGRAS DE EXTRAÇÃO:
 1. Extraia os valores financeiros EXATAMENTE como aparecem no texto (ex: "1.500,00" ou "1.500.000,00"). Retorne como STRING. NÃO tente converter para número ou padrão americano.
 2. Para "numero_arp", extraia como estiver no documento (ex: "018/2025", "18.2025", "04/25").
 3. Para "valor_total_empresa_alvo", procure pelo valor adjudicado especificamente para a Empresa Alvo. Se ela for a única fornecedora da Ata, este valor será igual ao "valor_total_ata".
-4. Para "unico_fornecedor", defina como true se a Empresa Alvo (ROSAFARM ou APROMEDICA) for a única fornecedora/vencedora de todo o documento (ou se não houver menção a nenhum outro fornecedor concorrente no cabeçalho ou texto fornecido). Caso contrário, se houver outros fornecedores vencedores listados, defina como false.
+4. Para "unico_fornecedor", defina como true se a Empresa Alvo (ROSAFARM ou NEXUS) for a única fornecedora/vencedora de todo o documento (ou se não houver menção a nenhum outro fornecedor concorrente no cabeçalho ou texto fornecido). Caso contrário, se houver outros fornecedores vencedores listados, defina como false.
 
 OUTRAS REGRAS DE EXTRAÇÃO E SEGURANÇA GEOGRÁFICA (MUITO CRÍTICO):
-- REGRA GEOGRÁFICA DE EVITAR FORNECEDOR NO COMPRADOR: O documento contém informações da empresa fornecedora/vencedora (como ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA ou APROMEDICA) que está sediada em Inhumas/GO ou Palmas/TO. JAMAIS utilize o município (Inhumas), o estado/uf (GO), o CEP (75400-000, 75402-000 ou similares) ou o CNPJ do fornecedor (37.676.047/0001-80 ou 13.973.552/0001-28) como dados de localização do órgão emissor/comprador (orgao_emissor).
+- REGRA GEOGRÁFICA DE EVITAR FORNECEDOR NO COMPRADOR: O documento contém informações da empresa fornecedora/vencedora (como ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA ou NEXUS) que está sediada em Inhumas/GO ou Palmas/TO. JAMAIS utilize o município (Inhumas), o estado/uf (GO), o CEP (75400-000, 75402-000 ou similares) ou o CNPJ do fornecedor (00.000.000/0001-99 ou 00.000.000/0001-96) como dados de localização do órgão emissor/comprador (orgao_emissor).
 - O orgao_emissor deve conter apenas os dados cadastrais do órgão comprador (Prefeitura, Consórcio, Secretaria, etc.), e sua localização (município/uf) deve ser a da prefeitura ou consórcio público (ex: se for da Prefeitura de Rio Maria, o município é "Rio Maria" e a UF é "PA").
 - data_emissao (data de assinatura ou publicação, procure especialmente no final do documento, formato YYYY-MM-DD)
 - orgao_emissor: {
@@ -876,8 +876,8 @@ JSON esperado: {
         const unicoFornecedor = headerData?.unico_fornecedor ?? false;
         // Detecta qual das nossas empresas é a fornecedora pelo contexto do globalContext
         const globalCtxUpper = globalContext.toUpperCase();
-        const empresaAlvoNome = globalCtxUpper.includes('APROMEDICA') || globalCtxUpper.includes('13.973.552') || globalCtxUpper.includes('13973552')
-            ? 'APROMEDICA'
+        const empresaAlvoNome = globalCtxUpper.includes('NEXUS') || globalCtxUpper.includes('13.973.552') || globalCtxUpper.includes('13973552')
+            ? 'NEXUS'
             : 'ROSAFARM';
 
         const minifiedContext = JSON.stringify({
@@ -886,9 +886,9 @@ JSON esperado: {
                 arp: headerData?.numero_arp || numeroArp || '',
                 empresa_alvo_cnpjs: ["37676047000180", "13973552000128"],
                 unico_fornecedor: unicoFornecedor,
-                empresa_alvo_nome: empresaAlvoNome || 'ROSAFARM ou APROMEDICA',
+                empresa_alvo_nome: empresaAlvoNome || 'ROSAFARM ou NEXUS',
                 instrucao_fornecedor: unicoFornecedor
-                    ? `ATENÇÃO: Este é um documento de fornecedor único. TODOS os itens desta ATA pertencem exclusivamente à empresa ${empresaAlvoNome || 'ROSAFARM/APROMEDICA'}. Defina vencidoPorEmpresaAlvo=true para TODOS os itens, independente do que aparecer nas páginas.`
+                    ? `ATENÇÃO: Este é um documento de fornecedor único. TODOS os itens desta ATA pertencem exclusivamente à empresa ${empresaAlvoNome || 'ROSAFARM/NEXUS'}. Defina vencidoPorEmpresaAlvo=true para TODOS os itens, independente do que aparecer nas páginas.`
                     : 'Identifique o fornecedor de cada item e marque vencidoPorEmpresaAlvo conforme apropriado.'
             }
         });
@@ -910,13 +910,13 @@ JSON esperado: {
         const promptPart = `Você é um extrator de dados de altíssima precisão especialista em ATAS de Registro de Preços.
 
 DADOS DA EMPRESA ALVO:
-- Nomes: ROSAFARM ou APROMEDICA (CNPJs: 37.676.047/0001-80 e 13.973.552/0001-28).
+- Nomes: ROSAFARM ou NEXUS (CNPJs: 00.000.000/0001-99 e 00.000.000/0001-96).
 
 MISSÃO PRINCIPAL:
 Extrair TODOS os itens da tabela de itens contidos no bloco de páginas fornecido — incluindo itens de QUALQUER fornecedor (nossos e concorrentes). NÃO OMITA nenhum item. O sistema fará a filtragem posterior. Seu trabalho é extrair fielmente e classificar.
 
 REGRAS CRÍTICAS:
-1. RETORNE TODOS OS ITENS: Extraia absolutamente todos os itens encontrados nas páginas, de todos os fornecedores. Para cada item, defina vencidoPorEmpresaAlvo=true se for da ROSAFARM ou APROMEDICA, e false para todos os outros fornecedores. NUNCA omita um item apenas por não ser da empresa alvo.
+1. RETORNE TODOS OS ITENS: Extraia absolutamente todos os itens encontrados nas páginas, de todos os fornecedores. Para cada item, defina vencidoPorEmpresaAlvo=true se for da ROSAFARM ou NEXUS, e false para todos os outros fornecedores. NUNCA omita um item apenas por não ser da empresa alvo.
 2. HERANÇA E IDENTIFICAÇÃO DE FORNECEDOR: O nome do fornecedor vencedor geralmente aparece em um cabeçalho destacado acima da tabela de itens (ex: "ROSAFARM DISTRIBUIDORA...", "D M HOSPITALAR LTDA"). Todos os itens abaixo desse cabeçalho pertencem a esse fornecedor até que outro cabeçalho de fornecedor apareça. Uma tabela pode se estender por várias páginas sem repetir o nome do fornecedor; nesse caso, herde o fornecedor do cabeçalho anterior.
 3. CUIDADO COM QUANTIDADES vs VALORES E UNIDADES COM NÚMEROS: A quantidade real do item vem exclusivamente da coluna 'Quantidade'. JAMAIS extraia números de dentro da coluna 'Unidade/Apresentação' (ex: 'CX 25 UN' ou 'CX 100 UN') como a quantidade comprada. Use a lógica: quantidade × valor_unitario = valor_total para validar.
 4. VALOR UNITÁRIO: Extraia o preço unitário como "Lance", "Valor Unit." ou equivalente. Ex: "5,32", "17,99".
@@ -936,7 +936,7 @@ MAPEAMENTO DE DADOS:
 - "marca": Marca do produto.
 - "valor_total": Valor total do item.
 - "fornecedor": Nome completo da empresa vencedora do item.
-- "vencidoPorEmpresaAlvo": true se ROSAFARM ou APROMEDICA, false caso contrário.
+- "vencidoPorEmpresaAlvo": true se ROSAFARM ou NEXUS, false caso contrário.
 - "paginaOriginal": Número da página de origem.
 
 TEXTO DO BLOCO:
@@ -1191,7 +1191,7 @@ JSON esperado:
             // =================================================================
             // MÁQUINA DE ESTADOS DETERMINÍSTICA DE TITULARIDADE NO FRONTEND
             // =================================================================
-            const NOSSOS_IDENTIFICADORES = ['ROSAFARM', 'APROMEDICA', '37676047', '37.676.047', '13973552', '13.973.552']
+            const NOSSOS_IDENTIFICADORES = ['ROSAFARM', 'NEXUS', '37676047', '37.676.047', '13973552', '13.973.552']
             
             let isNossaEmpresaAtiva = false; // Começa como false para não aceitar fornecedores anteriores à nossa empresa
             let encontrouTotalVencedor = false;
@@ -1252,8 +1252,8 @@ JSON esperado:
                 // Herança Contextual: se ativo, normaliza o nome e inclui o item
                 if (isNossaEmpresaAtiva) {
                     const fornUpper = fornOriginal.toUpperCase();
-                    if (fornUpper.includes('APROMEDICA') || fornUpper.includes('13973552') || fornUpper.includes('13.973.552')) {
-                        it.fornecedor = 'APROMEDICA (Consolidado)';
+                    if (fornUpper.includes('NEXUS') || fornUpper.includes('13973552') || fornUpper.includes('13.973.552')) {
+                        it.fornecedor = 'NEXUS (Consolidado)';
                     } else {
                         it.fornecedor = 'ROSAFARM (Consolidado)';
                     }
